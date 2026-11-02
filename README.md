@@ -16,9 +16,7 @@ Cloudflare, which then routes your domain's traffic through that tunnel.
 Both your browser and the `cloudflared` container only ever open **outbound**
 connections toward Cloudflare. Nothing connects inbound into your home
 network, so no port forwarding, no dynamic DNS client, and no public IP are
-required. `architecture-diagram-prompt.txt` has an equivalent AI
-image-generation prompt, in case you want to produce your own variant of
-this diagram.
+required.
 
 ## Stack
 
