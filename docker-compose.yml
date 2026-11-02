@@ -1,0 +1,67 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - nextcloud_net
+    depends_on:
+      - nextcloud
+
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - nextcloud_net
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    networks:
+      - nextcloud_net
+
+  nextcloud:
+    image: nextcloud:30-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "4000:80"   # optional local LAN access via http://<host-ip>:4000, remove if not needed
+    volumes:
+      - nextcloud_html:/var/www/html
+      - nextcloud_data:/var/www/html/data
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
+      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
+      NEXTCLOUD_TRUSTED_DOMAINS: "${NEXTCLOUD_DOMAIN} localhost"
+      TRUSTED_PROXIES: "0.0.0.0/0"
+      REDIS_HOST: redis
+      REDIS_HOST_PASSWORD: ${REDIS_PASSWORD}
+      OVERWRITEPROTOCOL: https
+      OVERWRITECLIURL: "https://${NEXTCLOUD_DOMAIN}"
+    networks:
+      - nextcloud_net
+
+networks:
+  nextcloud_net:
+
+volumes:
+  db_data:
+  nextcloud_html:
+  nextcloud_data:
