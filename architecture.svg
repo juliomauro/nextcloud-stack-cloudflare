@@ -11,26 +11,26 @@
   <rect x="0" y="0" width="1000" height="760" fill="#ffffff"/>
 
   <!-- Browser -->
-  <rect x="40" y="40" width="240" height="110" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="40" y="40" width="200" height="110" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
   <text x="60" y="75" font-size="18" font-weight="700" fill="#1e293b">Browser</text>
   <text x="60" y="100" font-size="13" fill="#64748b">you, from anywhere</text>
   <text x="60" y="120" font-size="12" fill="#64748b" font-family="ui-monospace, monospace">https://cloud.example.com</text>
 
   <!-- Cloudflare Edge -->
-  <rect x="380" y="40" width="300" height="130" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-  <text x="400" y="72" font-size="18" font-weight="700" fill="#9a3412">Cloudflare Edge</text>
-  <text x="400" y="96" font-size="13" fill="#9a3412">DNS for cloud.example.com</text>
-  <text x="400" y="116" font-size="13" fill="#9a3412">Automatic TLS certificate</text>
-  <text x="400" y="136" font-size="13" fill="#9a3412">Bridges the two outbound connections</text>
+  <rect x="420" y="40" width="300" height="140" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="440" y="72" font-size="18" font-weight="700" fill="#9a3412">Cloudflare Edge</text>
+  <text x="440" y="97" font-size="13" fill="#9a3412">DNS for cloud.example.com</text>
+  <text x="440" y="118" font-size="13" fill="#9a3412">Automatic TLS certificate</text>
+  <text x="440" y="139" font-size="13" fill="#9a3412">Bridges the two outbound connections</text>
 
   <!-- Arrow 1: Browser -> Cloudflare Edge -->
-  <line x1="280" y1="100" x2="372" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-grey)"/>
-  <text x="283" y="88" font-size="12.5" fill="#475569">1 - normal HTTPS request</text>
+  <line x1="240" y1="100" x2="412" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-grey)"/>
+  <text x="248" y="88" font-size="12.5" fill="#475569">1 - normal HTTPS request</text>
 
   <!-- Arrow 2: Cloudflare Edge -> cloudflared (dashed, orange) -->
-  <line x1="530" y1="172" x2="453" y2="378" stroke="#f97316" stroke-width="2.2" stroke-dasharray="7 6" marker-end="url(#arrow-orange)"/>
-  <text x="545" y="255" font-size="12.5" fill="#c2410c">2 - outbound tunnel, started by</text>
-  <text x="545" y="272" font-size="12.5" fill="#c2410c">cloudflared, always open</text>
+  <line x1="570" y1="182" x2="453" y2="378" stroke="#f97316" stroke-width="2.2" stroke-dasharray="7 6" marker-end="url(#arrow-orange)"/>
+  <text x="565" y="260" font-size="12.5" fill="#c2410c">2 - outbound tunnel, started by</text>
+  <text x="565" y="277" font-size="12.5" fill="#c2410c">cloudflared, always open</text>
 
   <!-- Home network outer box -->
   <rect x="40" y="280" width="920" height="440" rx="16" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 6"/>
