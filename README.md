@@ -11,17 +11,14 @@ Cloudflare, which then routes your domain's traffic through that tunnel.
 
 ## Why this works behind CGNAT
 
-```
-Browser  ──HTTPS──▶  Cloudflare Edge  ◀──outbound tunnel──  cloudflared
-(anywhere)           (DNS + TLS)                            (on your home server)
-```
+![Architecture diagram: browser reaches Cloudflare Edge over HTTPS, which bridges to an outbound-only tunnel kept open by cloudflared inside the home network, which forwards to nextcloud, backed by MariaDB and Redis](architecture.svg)
 
 Both your browser and the `cloudflared` container only ever open **outbound**
 connections toward Cloudflare. Nothing connects inbound into your home
 network, so no port forwarding, no dynamic DNS client, and no public IP are
-required. See `architecture-diagram-prompt.txt` for an AI image-generation prompt that
-produces a clean diagram of this flow, if you want a visual for your own
-notes.
+required. `architecture-diagram-prompt.txt` has an equivalent AI
+image-generation prompt, in case you want to produce your own variant of
+this diagram.
 
 ## Stack
 
